@@ -3,6 +3,15 @@
 #include <assert.h>
 //clang -Wall -Wextra -g -fsanitize=address bits.c -o bits && ./bits
 
+/*
+
+a library to manipulate bits. Each function uses masks and operations & | ^ (exclusive or) and ~ (not) to create masks to set certain bits to certain values.
+Practicing C.
+
+Things I notice: I could do a better job in commenting, it is genuinely hard to come back to this code and understand it. Still, I learned a lot of logic and syntax.
+
+*/
+
 void print_binary(uint32_t x) {
 
     for (int i = 31; i > -1; i--) {
@@ -120,34 +129,5 @@ uint32_t set_field(uint32_t x, int lo, int width, uint32_t v) {
     x = x | v;
 
     return x;
-
-}
-
-int main() {
-    //test on n = 7 bc it's a 1.
-    uint32_t binary = 0xA1u;
-    print_binary(binary);
-    printf("set bit 7: \n");
-    print_binary(set_bit(binary, 7));
-    printf("\n");
-    printf("toggle bit 7: \n");
-    print_binary(toggle_bit(binary, 7));
-    printf("\n");
-    printf("clear bit 7: \n");
-    print_binary(clear_bit(binary, 7));
-    printf("\n");
-    printf("%u (expect 2)\n", get_field(0xA1u, 4, 3));
-    printf("%u (expect 1)\n", get_field(0xA1u, 0, 4));
-    printf("%u (expect 10)\n", get_field(0xA1u, 4, 4));
-    printf("%u (expect 4294967295)\n", get_field(0xFFFFFFFFu, 0, 32));
-    printf("Count ones in 20(expected 2): %d \n", popcount(20));
-    printf("\n\n");
-
-    printf("%x expect ea\n", set_field(10u, 5, 3, 7u));
-
-    printf("\n\n");
-
-    return 0;
-
 
 }
